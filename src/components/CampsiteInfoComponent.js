@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   Card,
   CardImg,
-  CardImgOverlay,
   CardText,
   CardBody,
   CardTitle
@@ -34,7 +33,7 @@ class CampsiteInfo extends Component {
         <div className="col-md-5 m-1">
           <h4>Comments</h4>
           {comments.map(comment => (
-            <div key={comment.id} >
+            <div key={comment.id}>
               <div>{comment.text}</div>
               <div className="mb-3">
                 -- {comment.author},{" "}
@@ -56,9 +55,11 @@ class CampsiteInfo extends Component {
   render() {
     if (this.props.campsite) {
       return (
-        <div className="row">
-          {this.renderCampsite(this.props.campsite)}
-          {this.renderComments(this.props.campsite.comments)}
+        <div className="container">
+          <div className="row">
+            {this.renderCampsite(this.props.campsite)}
+            {this.renderComments(this.props.campsite.comments)}
+          </div>
         </div>
       );
     } else {
