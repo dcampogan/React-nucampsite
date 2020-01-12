@@ -9,7 +9,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-function RenderCampsite({campsite}) {
+function RenderCampsite({ campsite }) {
   return (
     <div className="col-md-5 m-1">
       <Card>
@@ -22,29 +22,29 @@ function RenderCampsite({campsite}) {
   );
 }
 
-function RenderComments({comments}) {
-      if (comments) {
-        return (
-          <div className="col-md-5 m-1">
-            <h4>Comments</h4>
-            {comments.map(comment => (
-              <div key={comment.id}>
-                <div>{comment.text}</div>
-                <div className="mb-3">
-                  -- {comment.author},{" "}
-                  {new Intl.DateTimeFormat("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "2-digit"
-                  }).format(new Date(Date.parse(comment.date)))}
-                </div>
-              </div>
-            ))}
+function RenderComments({ comments }) {
+  if (comments) {
+    return (
+      <div className="col-md-5 m-1">
+        <h4>Comments</h4>
+        {comments.map(comment => (
+          <div key={comment.id}>
+            <div>{comment.text}</div>
+            <div className="mb-3">
+              -- {comment.author},{" "}
+              {new Intl.DateTimeFormat("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "2-digit"
+              }).format(new Date(Date.parse(comment.date)))}
+            </div>
           </div>
-        );
-      }
-      return <div></div>;
-    }
+        ))}
+      </div>
+    );
+  }
+  return <div></div>;
+}
 
 function CampsiteInfo(props) {
   if (props.campsite) {
@@ -53,7 +53,9 @@ function CampsiteInfo(props) {
         <div className="row">
           <div className="col">
             <Breadcrumb>
-              <BreadcrumbItem><Link to="/directory">Directory</Link></BreadcrumbItem>
+              <BreadcrumbItem>
+                <Link to="/directory">Directory</Link>
+              </BreadcrumbItem>
               <BreadcrumbItem active>{props.campsite.name}</BreadcrumbItem>
             </Breadcrumb>
             <h2>{props.campsite.name}</h2>
@@ -71,8 +73,6 @@ function CampsiteInfo(props) {
 }
 
 export default CampsiteInfo;
-
-
 
 //-------------------------------------------------
 
