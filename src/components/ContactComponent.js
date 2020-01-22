@@ -7,7 +7,7 @@ import {
   Col,
   Row
 } from "reactstrap";
-import { Control, LocalForm, Errors } from "react-redux-form";
+import { Control, Form, Errors, actions } from 'react-redux-form';
 import { Link } from "react-router-dom";
 
 const required = val => val && val.length; //tests if field has something in it and returns true if it does and false if it doesn't and will create an error
@@ -43,9 +43,10 @@ class Contact extends Component {
 
   //JSON.stringify - global method that helps make string from object.
   handleSubmit(values) {
-    console.log("Current state is: " + JSON.stringify(values));
-    alert("Current state is: " + JSON.stringify(values));
-  }
+    console.log('Current State is: ' + JSON.stringify(values));
+    alert('Current State is: ' + JSON.stringify(values));
+    this.props.resetFeedbackForm();
+}
 
   render() {
     return (
@@ -96,7 +97,7 @@ class Contact extends Component {
             <hr />
           </div>
           <div className="col-md-10">
-            <LocalForm onSubmit={values => this.handleSubmit(values)}>
+          <Form model="feedbackForm" onSubmit={values => this.handleSubmit(values)}> 
               <Row className="form-group">
                 <Label htmlFor="firstName" md={2}>
                   First Name
@@ -262,7 +263,7 @@ class Contact extends Component {
                   </Button>
                 </Col>
               </Row>
-            </LocalForm>
+            </Form>
           </div>
         </div>
       </div>
