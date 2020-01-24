@@ -15,6 +15,7 @@ import {
 import { Loading } from './LoadingComponent';
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { Link } from "react-router-dom";
+import { baseUrl } from '../shared/baseUrl';
 
 const required = val => val && val.length; //tests if field has something in it and returns true if it does and false if it doesn't and will create an error
 const maxLength = len => val => !val || val.length <= len;
@@ -137,7 +138,7 @@ function RenderCampsite({ campsite }) {
   return (
     <div className="col-md-5 m-1">
       <Card>
-        <CardImg top src={campsite.image} alt={campsite.name} />
+        <CardImg top src={baseUrl + campsite.image} alt={campsite.name} />
         <CardBody>
           <CardText>{campsite.description}</CardText>
         </CardBody>
