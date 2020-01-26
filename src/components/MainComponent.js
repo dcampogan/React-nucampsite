@@ -12,7 +12,9 @@ import {
   postComment,
   fetchCampsites,
   fetchComments,
-  fetchPromotions
+  fetchPromotions,
+  fetchPartners,
+  postFeedback
 } from "../redux/ActionCreators";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -33,35 +35,35 @@ const mapDispatchToProps = {
   fetchCampsites: () => fetchCampsites(),
   resetFeedbackForm: () => actions.reset("feedbackForm"),
   fetchComments: () => fetchComments(),
-  fetchPromotions: () => fetchPromotions()
+  fetchPromotions: () => fetchPromotions(),
+  fetchPartners: () => fetchPartners(),
+  postFeedback: (feedback) => (postFeedback(feedback))
 };
 
 class Main extends Component {
+  
   componentDidMount() {
     this.props.fetchCampsites();
     this.props.fetchComments();
     this.props.fetchPromotions();
+    this.props.fetchPartners();
   }
 
   render() {
     const HomePage = () => {
       return (
         <Home
-          campsite={
-            this.props.campsites.campsites.filter(
-              campsite => campsite.featured
-            )[0]
-          }
+          campsite={this.props.campsites.campsites.filter(campsite => campsite.featured)[0]}
           campsitesLoading={this.props.campsites.isLoading}
           campsitesErrMess={this.props.campsites.errMess}
-          partner={this.props.partners.filter(partner => partner.featured)[0]}
-          promotion={
-            this.props.promotions.promotions.filter(
-              promotion => promotion.featured
-            )[0]
-          }
+
+          promotion={this.props.promotions.promotions.filter(promotion => promotion.featured)[0]}
           promotionLoading={this.props.promotions.isLoading}
           promotionErrMess={this.props.promotions.errMess}
+
+          partner={this.props.partners.partners.filter(partner => partner.featured)[0]}
+          partnerLoading={this.props.partners.isLoading}
+          partnerErrMess={this.props.partners.errMess}
         />
       );
     };
@@ -106,7 +108,10 @@ class Main extends Component {
                 exact
                 path="/contactus"
                 render={() => (
-                  <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+                  <Contact 
+                  resetFeedbackForm={this.props.resetFeedbackForm}
+                  postFeedback={this.props.postFeedback}
+                  />
                 )}
               />
               <Route
@@ -125,3 +130,4 @@ class Main extends Component {
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
+//makes components available to main component as prop

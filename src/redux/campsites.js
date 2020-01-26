@@ -1,7 +1,10 @@
 import * as ActionTypes from './ActionTypes';
 
+//REDUCER FUNCTION TO HANDLE THIS PART OF STATE
+//will updtate part of state when add comment action
+//is dispatched to the store
+
 export const Campsites = (state = {
-    
   isLoading: true,
   errMess: null,
   campsites: []

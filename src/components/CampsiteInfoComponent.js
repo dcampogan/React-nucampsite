@@ -16,7 +16,7 @@ import { Loading } from "./LoadingComponent";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../shared/baseUrl";
-import { FadeTransform, Fade, Stagger } from "react-animation-components";
+import { Fade, Random } from "react-animation-components";
 
 const required = val => val && val.length; //tests if field has something in it and returns true if it does and false if it doesn't and will create an error
 const maxLength = len => val => !val || val.length <= len;
@@ -138,19 +138,14 @@ class CommentForm extends Component {
 function RenderCampsite({ campsite }) {
   return (
     <div className="col-md-5 m-1">
-      <FadeTransform
-        in
-        transformProps={{
-          exitTransform: "scale(0.5) translateY(-50%)"
-        }}
-      >
+      <Fade in timingFn="ease-in-out">
         <Card>
           <CardImg top src={baseUrl + campsite.image} alt={campsite.name} />
           <CardBody>
             <CardText>{campsite.description}</CardText>
           </CardBody>
         </Card>
-      </FadeTransform>
+      </Fade>
     </div>
   );
 }
@@ -160,9 +155,9 @@ function RenderComments({ comments, postComment, campsiteId }) {
     return (
       <div className="col-md-5 m-1">
         <h4>Comments</h4>
-        <Stagger in>
+        <Random in minDelay={0} maxDelay={300}>
         {comments.map(comment => (
-          <Fade in key={comment.id}>
+          <Fade in timingFn="ease-in-out" key={comment.id}>
           <div>
             <div>{comment.text}</div>
             <div className="mb-3">
@@ -176,7 +171,7 @@ function RenderComments({ comments, postComment, campsiteId }) {
           </div>
           </Fade>
         ))}
-        </Stagger>
+        </Random>
         <CommentForm campsiteId={campsiteId} postComment={postComment} />
       </div>
     );

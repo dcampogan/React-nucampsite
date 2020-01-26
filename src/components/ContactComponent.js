@@ -7,7 +7,7 @@ import {
   Col,
   Row
 } from "reactstrap";
-import { Control, Form, Errors, actions } from 'react-redux-form';
+import { Control, Form, Errors } from 'react-redux-form';
 import { Link } from "react-router-dom";
 
 const required = val => val && val.length; //tests if field has something in it and returns true if it does and false if it doesn't and will create an error
@@ -43,9 +43,8 @@ class Contact extends Component {
 
   //JSON.stringify - global method that helps make string from object.
   handleSubmit(values) {
-    console.log('Current State is: ' + JSON.stringify(values));
-    alert('Current State is: ' + JSON.stringify(values));
     this.props.resetFeedbackForm();
+    this.props.postFeedback(values)
 }
 
   render() {
